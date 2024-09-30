@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="emp_db")                               //table name. otherwise it takes EmployeeEntitiy by default as table name
+@Table(name="emp_db")                               //table name. otherwise it takes EmployeeEntity by default as table name
 public class EmployeeEntity {
 
     @Id
