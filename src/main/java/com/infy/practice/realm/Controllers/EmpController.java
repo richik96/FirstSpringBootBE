@@ -1,6 +1,10 @@
-package com.infy.practice.realm;
+package com.infy.practice.realm.Controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.infy.practice.realm.Employee;
+import com.infy.practice.realm.EmployeeService;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
