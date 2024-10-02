@@ -59,7 +59,7 @@ public class EmpController {
         return "Employee not found";
     }
 
-    @PutMapping("employee/{id}")
+    @PutMapping("employees/{id}")
     public String putMethodName(@PathVariable Long id, @RequestBody Employee employee) {
         return employeeService.updateEmployee(id, employee);
     }
