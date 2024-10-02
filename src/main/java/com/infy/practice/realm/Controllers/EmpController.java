@@ -3,7 +3,7 @@ package com.infy.practice.realm.Controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infy.practice.realm.Employee;
-import com.infy.practice.realm.EmployeeService;
+import com.infy.practice.realm.Services.EmployeeService;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class EmpController {
         return "Employee not found";
     }
 
-    @PutMapping("employee/{id}")
+    @PutMapping("employees/{id}")
     public String putMethodName(@PathVariable Long id, @RequestBody Employee employee) {
         return employeeService.updateEmployee(id, employee);
     }

@@ -1,5 +1,6 @@
-package com.infy.practice.realm;
+package com.infy.practice.realm.Repository;
 
+import com.infy.practice.realm.EmployeeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

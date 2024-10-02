@@ -1,11 +1,16 @@
-package com.infy.practice.realm;
+package com.infy.practice.realm.Services;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.infy.practice.realm.Employee;
+import com.infy.practice.realm.EmployeeEntity;
+import com.infy.practice.realm.Repository.EmployeeRepository;
 
 @Service
 public class EmployeeServiceImplement implements EmployeeService {
@@ -56,17 +61,17 @@ public class EmployeeServiceImplement implements EmployeeService {
 
     @Override
     public String updateEmployee(Long id, Employee employee) {
-        
-        EmployeeEntity existingEmployee = employeeRepository.findById(id).get();
-
-        existingEmployee.setName(employee.getName());
-        existingEmployee.setDepartment(employee.getDepartment());
-        existingEmployee.setEmail(employee.getEmail());
-
-        employeeRepository.save(existingEmployee);
-        
-        return "Update Successful";
+        Optional<EmployeeEntity> optionalEmployeeEntity = employeeRepository.findById(id);
+        if (optionalEmployeeEntity.isPresent()) {
+            EmployeeEntity existingEmployee = optionalEmployeeEntity.get();
+            existingEmployee.setName(employee.getName());
+            existingEmployee.setDepartment(employee.getDepartment());
+            existingEmployee.setEmail(employee.getEmail());
+            employeeRepository.save(existingEmployee);
+            return "Update Successful";
+        } else {
+            // Handle the case where the employee is not found
+            return "Employee not found"; // or throw an exception
+        }
     }
-    
-
 }
