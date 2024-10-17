@@ -17,5 +17,7 @@ public interface EmployeeService {
     //UPDATE
     String updateEmployee(Long id, Employee employee);
 
+    Employee patchEmployee(Long id, Employee entity);
+
     
 }

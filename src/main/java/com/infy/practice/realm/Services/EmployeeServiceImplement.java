@@ -74,4 +74,29 @@ public class EmployeeServiceImplement implements EmployeeService {
             return "Employee not found"; // or throw an exception
         }
     }
+
+    @Override
+    public Employee patchEmployee(Long id, Employee entity) {
+        
+        Optional<EmployeeEntity> optionalEmployeeEntity = employeeRepository.findById(id);
+        if (optionalEmployeeEntity.isPresent()) {
+            EmployeeEntity existingEmployee = optionalEmployeeEntity.get();
+            if (entity.getName() != null) {
+                existingEmployee.setName(entity.getName());
+            }
+            if (entity.getDepartment() != null) {
+                existingEmployee.setDepartment(entity.getDepartment());
+            }
+            if (entity.getEmail() != null) {
+                existingEmployee.setEmail(entity.getEmail());
+            }
+            employeeRepository.save(existingEmployee);
+            Employee emp = new Employee();
+            BeanUtils.copyProperties(existingEmployee, emp);
+            return emp;
+        } else {
+            // Handle the case where the employee is not found
+            return null; // or throw an exception
+        }
+    }
 }

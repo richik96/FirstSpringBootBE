@@ -10,9 +10,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 //Control Layel --> request fetch and response send
 
 @RestController
+@RequestMapping("/employees")
 public class EmpController {
 
     //List<Employee> employees = new ArrayList<>();       //class level list creation
@@ -29,7 +32,7 @@ public class EmpController {
     @Autowired                                    //@autowired -> marks dependency injection
     EmployeeService employeeService;              //dependency injection --> letting IOC do work at the back -> creates a object for you
 
-    @GetMapping("employees")
+    @GetMapping()
     public List<Employee> getAllEmployees() {
 
         return employeeService.readEmployees();             
@@ -40,7 +43,7 @@ public class EmpController {
         // employees.add(emp);
     }
 
-    @GetMapping("employees/{id}")
+    @GetMapping("/{id}")
     public Employee getEmployee(@PathVariable Long id) {
         return employeeService.readEmployee(id);
     }
@@ -52,15 +55,20 @@ public class EmpController {
         //return "Saved successfully";
     }
 
-    @DeleteMapping("employees/{id}")
+    @DeleteMapping("/{id}")
     public String deleteEmployee(@PathVariable Long id) {
         if(employeeService.deleteEmployee(id))
             return "Deleted successfully";
         return "Employee not found";
     }
 
-    @PutMapping("employees/{id}")
+    @PutMapping("/{id}")
     public String putMethodName(@PathVariable Long id, @RequestBody Employee employee) {
         return employeeService.updateEmployee(id, employee);
+    }
+
+    @PatchMapping("/{id}")
+    public Employee patchEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        return employeeService.patchEmployee(id, employee);
     }
 }
